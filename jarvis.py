@@ -43,19 +43,21 @@ def takeCommand():
         print("say that again please....")
         return "None"
     return query
-
+def runCommand():
+    while True:
+        query = takeCommand().lower()
+        if 'wikipedia' in query:
+            speak('Searching Wikipedia.....')
+            query = query.replace("Wikipedia", "")
+            results = wikipedia.summary(query, Sentences=2)
+            speak("According to Wiki")
+            speak(results)
+        elif 'open youtube' in query:
+            webbrowser.open("youtube.com")
 
 if __name__ == "__main__":
     wishMe()
-    # takeCommand()
-    # while True:
-    #     query = takeCommand().lower()
-    #     if 'wikipedia' in query:
-    #         speak('Searching Wikipedia.....')
-    #         query = query.replace("Wikipedia", "")
-    #         results = wikipedia.summary(query, Sentences=2)
-    #         speak("According to Wiki")
-    #         speak(results)
-    #     elif 'open youtube' in query:
-    #         webbrowser.open("youtube.com")
+    takeCommand()
+    runCommand()
+    
     # executing tasks
