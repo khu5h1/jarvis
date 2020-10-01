@@ -4,6 +4,7 @@ import speech_recognition as sr
 import wikipedia
 import webbrowser
 import os
+from pyowm import *
 
 engine = pyttsx3.init('sapi5')  # to use the voice provided by windows
 voices = engine.getProperty('voices')  # To get the list of voices
@@ -26,6 +27,13 @@ def wishMe():
 
     speak("I am your assistant sir!!! How may i help you?")
 
+def weather():
+        owm = OWM('your-API-key')  # You MUST provide a valid API key (which is free, btw)
+        mgr = owm.weather_manager()
+        observation = mgr.weather_at_place('London,GB')#replace with appropiate city
+        w = observation.weather
+        print(w.wind(), w.humidity, w.temperature('celsius'))
+	speak(w.wind(), w.humidity, w.temperature('celsius'))
 
 def takeCommand():
     r = sr.Recognizer()
@@ -63,6 +71,7 @@ def runCommand():
 if __name__ == "__main__":
     wishMe()
     takeCommand()
+    weather()	
     runCommand()
     
     # executing tasks
