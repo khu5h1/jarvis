@@ -4,6 +4,14 @@ import speech_recognition as sr
 import wikipedia
 import webbrowser
 import os
+import pyjokes
+import smtplib
+import psutil
+import pyautogui
+
+
+
+
 
 engine = pyttsx3.init('sapi5')  # to use the voice provided by windows
 voices = engine.getProperty('voices')  # To get the list of voices
@@ -44,6 +52,33 @@ def takeCommand():
         print("say that again please....")
         return "None"
     return query
+
+def jokes():
+	speak(pyjokes.get_jokes))
+	
+def sendEmail(to,content):
+	server = smtplib.SMTP('smtp.gmail.com',587)
+	server.ehlo()
+	server.starttls()
+	server.login('youremail@gmail.com','password123')
+	server.sendmail('receiveremail@gmail.com',to,content)
+	server.close()
+	
+def cpu():
+	usage = str.(psutil.cpu_percent())
+	speak("cpu is at"+usage)
+	battery = psutil.sensors_battery()
+	speak("battery is at")
+	speak(battery.percent)
+
+def screenshot():
+	img=pyautogui.screenshot()
+	img.save('path where you want to save the image')
+	
+	
+	
+	
+	
 def runCommand():
     while True:
         query = takeCommand().lower()
@@ -59,6 +94,30 @@ def runCommand():
             music_dir = 'C:\\Khushi\\Songs\\MyFavorites'
 			songs = os.listdir(music_dir)
 			os.startfile(os.path.join(music_dir, songs[0]))
+        elif 'jokes' in query:
+		joke()
+	
+	elif 'send email' in query:
+		            try:
+                speak("what should i say")
+                content=takecommand()
+                speak("who is the receiver")
+                receiver=input('enter receiver email')
+                to=receiver
+                sendEmail(to,content)
+                speak(content)
+                speak("email is send")
+
+            except Exception as e:
+                print(e)
+                speak("unable to send email")
+		
+	elif 'screenshot' in query:
+		screenshot()
+	
+	elif 'cpu' in query:
+		cpu()
+		
 
 if __name__ == "__main__":
     wishMe()
