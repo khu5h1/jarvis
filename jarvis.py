@@ -3,6 +3,7 @@ import datetime
 import speech_recognition as sr
 import wikipedia
 import webbrowser
+import os
 
 engine = pyttsx3.init('sapi5')  # to use the voice provided by windows
 voices = engine.getProperty('voices')  # To get the list of voices
@@ -54,6 +55,10 @@ def runCommand():
             speak(results)
         elif 'open youtube' in query:
             webbrowser.open("youtube.com")
+        elif 'play music' in query:
+            music_dir = 'C:\\Khushi\\Songs\\MyFavorites'
+			songs = os.listdir(music_dir)
+			os.startfile(os.path.join(music_dir, songs[0]))
 
 if __name__ == "__main__":
     wishMe()
