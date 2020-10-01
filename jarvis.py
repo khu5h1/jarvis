@@ -59,6 +59,16 @@ def runCommand():
             music_dir = 'C:\\Khushi\\Songs\\MyFavorites'
 			songs = os.listdir(music_dir)
 			os.startfile(os.path.join(music_dir, songs[0]))
+	elif 'search on youtube' in query:
+                speak("What do you want to search Sir?")
+                search_Youtube = take_Command()
+                speak(f"Searching {search_Youtube} on youtube...")
+                webbrowser.open("https://www.youtube.com/results?search_query=" + search_Youtube)
+	elif 'search on google' in query:
+                speak("What do you want to search Sir?")
+                search_Google = take_Command()
+                speak(f"Searching {search_Google} on google...")
+                webbrowser.open("https://google.com/?#q=" + search_Google)
 
 if __name__ == "__main__":
     wishMe()
